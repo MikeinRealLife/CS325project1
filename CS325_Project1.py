@@ -112,8 +112,19 @@ def linear_time(arr):
     max_sum = 0
     total = 0
     i = 0
-    for j in range(i, len(arr)):
+    for j in range(0, len(arr)):
+        total += arr[j]
+        print(total)
         
+        if total > max_sum:
+            max_sum = total
+            
+        while total <= max_sum and i < j:
+            total -= arr[i]
+            i+=1
+        
+     
+    return max_sum
         
         
         
@@ -122,3 +133,6 @@ test_data = file_reader()
 val = d_and_c(test_data[0], 0)
 
 max_vals = enumerate_test(test_data)
+
+test = linear_time(test_data[0])
+print('Answer is: ' +str(test))
