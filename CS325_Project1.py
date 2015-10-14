@@ -32,9 +32,13 @@ def enumerate_case(array):
                 total += array[y]
             
             #if sum is larger than max_sum, set new max_sum
-            max_sum = max(max_sum, total)
+            if total > max_sum:
+                max_sum = total
+                
+                #this line tells you the values in your max array
+                sum_arr = [j for j in array[x:i+1]]
 
-    return max_sum
+    return max_sum, sum_arr
 
 #I think this is actually the better enum case?
 def better_enumerate_case(array):
@@ -54,9 +58,14 @@ def better_enumerate_case(array):
             total += array[i]
             
             #if sum is larger than max_sum, set new max_sum
-            max_sum = max(max_sum, total)
+            if total > max_sum:
+                max_sum = total
                 
-    return max_sum
+                #this line tells you the values in your max array
+                sum_arr = [j for j in array[x:i+1]]
+                
+                
+    return max_sum, sum_arr
     
 def d_and_c(arr, max_sum):
     
@@ -97,6 +106,16 @@ def enumerate_test(test_packet):
         #max_arrs.append(mx_arr)
         
     return max_vals
+    
+def linear_time(arr):
+    
+    max_sum = 0
+    total = 0
+    i = 0
+    for j in range(i, len(arr)):
+        
+        
+        
         
 test_data = file_reader()
     
