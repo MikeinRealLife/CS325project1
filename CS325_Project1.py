@@ -32,8 +32,7 @@ def enumerate_case(array):
                 total += array[y]
             
             #if sum is larger than max_sum, set new max_sum
-            if total > max_sum:
-                max_sum = total
+            max_sum = max(max_sum, total)
 
     return max_sum
 
@@ -55,8 +54,7 @@ def better_enumerate_case(array):
             total += array[i]
             
             #if sum is larger than max_sum, set new max_sum
-            if total > max_sum:
-                max_sum = total
+            max_sum = max(max_sum, total)
                 
     return max_sum
     
@@ -69,11 +67,21 @@ def d_and_c(arr, max_sum):
         arr1 = arr[:mid]
         arr2 = arr[mid:]
         
-        sum1 = sum(arr1)
-        sum2 = sum(arr2)
-        sum3 = sum(arr1) + sum(arr2)
+        sum1 = 0
+        max_sum1 = 0
+        for x in range(len(arr1)-1, -1, -1):
+            sum1 += arr1[x]
+            max_sum1 = max(max_sum1, sum1)
+            
+        sum2 = 0
+        max_sum2 = 0
+        for x in range(0, len(arr2)):
+            sum2 += arr2[x]
+            max_sum2 = max(max_sum2, sum2)
+            
+        sum3 = max_sum1 + max_sum2
         
-        max_sum = max(max_sum, sum1, sum2, sum3)
+        max_sum = max(max_sum, max_sum1, max_sum2, sum3)
             
         return max(d_and_c(arr[:mid], max_sum), d_and_c(arr[mid:], max_sum))
         
