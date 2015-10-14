@@ -122,7 +122,7 @@ def enumerate_test(test_packet):
     max_arrs = []
     
     for line in test_packet:
-        mx_val, mx_arr = enumerate_case(line)
+        mx_val, mx_arr = linear_time(line)
         max_vals.append(mx_val)
         max_arrs.append(mx_arr)
         
@@ -133,17 +133,21 @@ def linear_time(arr):
     max_sum = 0
     total = 0
     sum_array = []
-    i = 0
+    start = 0
+    stop = 0
     
     for j in range(0, len(arr)):
         total += arr[j]
         if arr[j] > total:
             total = arr[j]
-            i = j
+            start = j
             
         if total > max_sum:
             max_sum = total
-            sum_array = [arr[x] for x in range(i, j+1)]
+            stop = j
+            
+            
+    sum_array = [arr[x] for x in range(start, stop+1)]
 
             
     return max_sum, sum_array
