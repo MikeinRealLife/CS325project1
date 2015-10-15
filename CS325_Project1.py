@@ -153,9 +153,34 @@ def linear_time(arr):
     return max_sum, sum_array
         
         
-        
+'''        
 test_data = file_reader()
 testar = []
 val, val2 = d_and_c(test_data[0], 0, testar)
 
 max_vals, max_arrs = enumerate_test(test_data)
+'''
+
+from random import randint
+
+def do_the_thing():
+    
+    number = input('How many random test cases do you want to generate? ')
+    MIN_NUM = -100
+    MAX_NUM = 100
+    
+    MIN_CASE = 15
+    MAX_CASE = 30
+    
+    test_cases = []
+    for x in xrange(number):
+        
+        case = []
+        num_case = randint(MIN_CASE, MAX_CASE)
+        for number in xrange(num_case):
+            case.append(randint(MIN_NUM, MAX_NUM))
+        test_cases.append(case)
+            
+    
+        
+    
