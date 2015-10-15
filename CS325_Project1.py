@@ -1,3 +1,5 @@
+from timeit import default_timer as dft
+
 def file_reader():
     #open file, read in all the lines
     with open("MSS_TestProblems.txt", 'r') as f:
@@ -40,6 +42,15 @@ def enumerate_case(array):
 
     return max_sum, max_array
 
+def time_enum(array):
+    start = dft()
+    max_sum, max_array = enumerate_case(array)
+    stop = dft()
+    
+    enum_time = stop - start
+    
+    return enum_time, max_sum, max_array
+    
 #I think this is actually the better enum case?
 def better_enumerate_case(array):
     
@@ -66,7 +77,17 @@ def better_enumerate_case(array):
                 
                 
     return max_sum, sum_arr
+
+def time_better(array):
+    start = dft()
+    max_sum, max_array = better_enumerate_case(array)
+    stop = dft()
     
+    enum_time = stop - start
+    
+    return enum_time, max_sum, max_array
+        
+            
 def d_and_c(arr, max_sum, max_arr):
     
     if len(arr) == 1:
@@ -116,7 +137,17 @@ def d_and_c(arr, max_sum, max_arr):
                 
         return max(d_and_c(arr[:mid], max_sum, max_arr), d_and_c(arr[mid:], max_sum, max_arr))
         
-          
+def time_dandc(array):
+    start = dft()
+    max_array = []
+    max_sum = 0
+    max_sum, max_array = d_and_c(array, max_sum, max_array)
+    stop = dft()
+    
+    enum_time = stop - start
+    
+    return enum_time, max_sum, max_array
+              
 def enumerate_test(test_packet):
     max_vals = []
     max_arrs = []
@@ -151,16 +182,16 @@ def linear_time(arr):
 
             
     return max_sum, sum_array
-        
-        
-'''        
-test_data = file_reader()
-testar = []
-val, val2 = d_and_c(test_data[0], 0, testar)
 
-max_vals, max_arrs = enumerate_test(test_data)
-'''
-
+def time_linear(array):
+    start = dft()
+    max_sum, max_array = linear_time(array)
+    stop = dft()
+    
+    enum_time = stop - start
+    
+    return enum_time, max_sum, max_array
+    
 from random import randint
 
 def do_the_thing():
@@ -180,7 +211,93 @@ def do_the_thing():
         for number in xrange(num_case):
             case.append(randint(MIN_NUM, MAX_NUM))
         test_cases.append(case)
+        
+    all_enum_times = []
+    all_enum_vals = []
+    all_enum_arrs = []
+    
+    all_better_times = []
+    all_better_vals = []
+    all_better_arrs = []
+    
+    all_dandc_times = []
+    all_dandc_vals = []
+    all_dandc_arrs = []
+    
+    all_line_times = []
+    all_line_vals = []
+    all_line_arrs = []
+    
+    for case in test_cases:
+        
+        enum_time, enum_vals, enum_arrs = time_enum(case)
+        all_enum_times.append(enum_time)
+        all_enum_vals.append(enum_vals)
+        all_enum_arrs.append(enum_arrs)
+        
+        better_time, better_vals, better_arrs = time_better(case)
+        all_better_times.append(better_time)
+        all_better_vals.append(better_vals)
+        all_better_arrs.append(better_arrs)
+        
             
+        dandc_time, dandc_vals, dandc_arrs = time_dandc(case)
+        all_dandc_times.append(dandc_time)
+        all_dandc_vals.append(dandc_vals)
+        all_dandc_arrs.append(dandc_arrs)    
+        
+        line_time, line_vals, line_arrs = time_linear(case)
+        all_line_times.append(line_time)
+        all_line_vals.append(line_vals)
+        all_line_arrs.append(line_arrs)
+        
+    f = open('Proj1_Solutions.txt', 'w')
+    
+    f.write('Enumerate Case:\n\n')
+    
+    
+    for x, case in enumerate(all_enum_times):
+        f.write(str(all_enum_times[x]))
+        f.write('\n')
+        f.write(str(all_enum_vals[x]))
+        f.write('\n')
+        f.write(str(all_enum_arrs[x]))
+        f.write('\n\n')
+        
+    f.write('\n\n')
+    
+    f.write('Better Enumerate Case:\n\n')
+    for x, case in enumerate(all_better_times):
+        f.write(str(all_better_times[x]))
+        f.write('\n')
+        f.write(str(all_better_vals[x]))
+        f.write('\n')
+        f.write(str(all_better_arrs[x]))
+        f.write('\n\n')
+        
+    f.write('\n\n')
+    
+    f.write('Divide and Conquer Case:\n\n')
+    for x, case in enumerate(all_dandc_times):
+        f.write(str(all_dandc_times[x]))
+        f.write('\n')
+        f.write(str(all_dandc_vals[x]))
+        f.write('\n')
+        f.write(str(all_dandc_arrs[x]))
+        f.write('\n\n')
+        
+    f.write('\n\n')
+    
+    f.write('Linear Case:\n\n')
+    for x, case in enumerate(all_line_times):
+        f.write(str(all_line_times[x]))
+        f.write('\n')
+        f.write(str(all_line_vals[x]))
+        f.write('\n')
+        f.write(str(all_line_arrs[x]))
+        f.write('\n\n')
+        
+    f.close()
+    
     
         
-    
