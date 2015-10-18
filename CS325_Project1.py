@@ -176,7 +176,7 @@ def linear_time(arr):
             total = arr[j]
             start = j
             
-        if total > max_sum:
+        if total >= max_sum:
             max_sum = total
             stop = j
             
