@@ -31,7 +31,7 @@ def enumerate_case(array):
             total = 0
             array_test = []
             #sum total
-            for y in range(x, i):
+            for y in range(x, i+1):
                 total += array[y]
                 array_test.append(array[y])
                 
