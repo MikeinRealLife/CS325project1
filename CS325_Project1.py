@@ -91,6 +91,9 @@ def time_better(array):
 def d_and_c(arr, max_sum, max_arr):
     
     if len(arr) == 1:
+        if arr[0] > max_sum:
+            max_sum = arr[0]
+            max_arr = arr[0]
         return max_sum, max_arr
         
     else:
