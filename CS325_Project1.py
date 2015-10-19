@@ -2,7 +2,7 @@ from timeit import default_timer as dft
 
 def file_reader():
     #open file, read in all the lines
-    with open("MSS_TestProblems.txt", 'r') as f:
+    with open("MSS_Problems.txt", 'r') as f:
         temp_data = f.readlines()
     f.close()
     #create array for data
@@ -254,7 +254,7 @@ def do_the_thing():
         all_line_vals.append(line_vals)
         all_line_arrs.append(line_arrs)
         
-    f = open('Proj1_Solutions.txt', 'w')
+    f = open('MSS_Results.txt', 'w')
     
     f.write('Enumerate Case:\n\n')
     
